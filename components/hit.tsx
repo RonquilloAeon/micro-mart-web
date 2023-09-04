@@ -1,32 +1,29 @@
 import {Highlight} from "react-instantsearch";
 
-const Hit = ({hit}) => <div>
-  <div className="row image-container">
-    <div className="col-md d-flex align-items-end justify-content-center">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      {/* <img src={hit.image} alt={hit.name} /> */}
-    </div>
-  </div>
-  <div className="row mt-5">
-    <div className="col-md">
-      <h5>
+interface HitProps {
+  hit: {
+    image: string;
+    name: string;
+    description: string;
+    price: number;
+  };
+}
+
+const Hit: React.FC<HitProps> = ({hit}) => (
+  <div className="flex flex-col bg-white shadow-md rounded-md overflow-hidden m-1">
+    <img className="w-full h-64 object-cover" src="https://loremflickr.com/320/240/computers" alt={hit.name} />
+    <div className="p-6">
+      <h2 className="text-lg font-semibold text-gray-700">
         <Highlight hit={hit} attribute="name" />
-      </h5>
+      </h2>
+      <p className="text-sm text-gray-500 mt-2">
+        <Highlight hit={hit} attribute="description" />
+      </p>
+      <div className="mt-auto">
+        <div className="font-bold text-gray-700 mt-4">${hit.price}</div>
+      </div>
     </div>
   </div>
-
-  <div className="row mt-2">
-    <div className="col-md">
-      <Highlight hit={hit} attribute="description" />
-    </div>
-  </div>
-
-  <div className="row mt-auto">
-    <div className="col-md">
-      <div className="hit-price fw-bold mt-4">{hit.price}</div>
-      <div className="hit-rating">Rating: {hit.rating}/5</div>
-    </div>
-  </div>
-</div>;
+);
 
 export default Hit;
