@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ais-Hits-list {
+  @apply grid grid-cols-3;
+}
